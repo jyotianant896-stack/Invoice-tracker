@@ -1,64 +1,176 @@
-# Ledger — Invoice Tracker
+# Ledger – Invoice Tracker
 
-A small, single-page invoice tracker built with React, Vite, and Tailwind CSS.
-All data lives in React state and is persisted to `localStorage`, so a page
-refresh doesn't lose anything. No backend, no database.
+## Overview
 
-## Running it
+Ledger is a modern, single-page **Invoice Tracker** application built with **React**, **Vite**, and **Tailwind CSS**. It provides an intuitive interface for creating, managing, and tracking invoices while offering real-time financial insights.
+
+The application is entirely frontend-based, with invoice data managed through React state and persisted using **localStorage**, ensuring that all records remain available even after refreshing the browser. No backend or database is required.
+
+---
+
+## Technology Stack
+
+* **Frontend:** React, Vite
+* **Styling:** Tailwind CSS
+* **Language:** JavaScript (ES6+)
+* **Storage:** Browser Local Storage
+
+---
+
+## Getting Started
+
+### Install Dependencies
 
 ```bash
 npm install
+```
+
+### Run the Development Server
+
+```bash
 npm run dev
 ```
 
-Then open the URL Vite prints (usually `http://localhost:5173`).
+Open the application in your browser using the URL provided by Vite (typically `http://localhost:5173`).
 
-To create a production build:
+### Production Build
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## What's here
+---
 
-- **First load**: the app seeds a handful of example invoices (a mix of
-  paid, unpaid, and overdue) so there's something to look at immediately.
-  After that, everything you do is saved to `localStorage` under the key
-  `ledger.invoices.v1`.
-- **Add an invoice**: the form validates that the customer name is present,
-  the amount is a positive number, and a due date is set. Errors show
-  inline next to each field and the invoice is never added until the form
-  is valid.
-- **Mark as paid**: once an invoice is paid, the button becomes disabled
-  and clicking it (or an already-disabled state) shows a small
-  "Already paid." message instead of doing anything.
-- **Filter**: All / Unpaid / Paid, with live counts in each tab.
-- **Summary bar**: total invoice count, total outstanding (sum of unpaid),
-  and total collected (sum of paid) — all computed from the invoice list
-  on every render, never stored as separate state that could drift out
-  of sync.
-- **Overdue bonus**: unpaid invoices past their due date get an "Overdue"
-  tag and a subtle highlighted row.
+## Key Features
 
-## Structure
+### Invoice Management
+
+* Create new invoices with customer details, amount, and due date.
+* View all invoices in a clean, organized table.
+* Mark invoices as paid with a single click.
+* Prevent duplicate payment actions for invoices that have already been paid.
+
+### Form Validation
+
+The application performs client-side validation to ensure data integrity by verifying:
+
+* Customer name is provided.
+* Invoice amount is greater than zero.
+* Due date is selected.
+
+Validation errors are displayed inline, preventing invalid submissions.
+
+### Invoice Filtering
+
+Easily filter invoices by status:
+
+* All
+* Paid
+* Unpaid
+
+Each filter displays a live invoice count for quick insights.
+
+### Financial Summary
+
+A dynamic summary dashboard displays:
+
+* Total Invoices
+* Total Outstanding Amount
+* Total Collected Amount
+
+These values are calculated directly from the current invoice list on every render, ensuring the displayed information is always accurate and synchronized.
+
+### Overdue Invoice Detection
+
+Invoices that remain unpaid after their due date are automatically:
+
+* Marked with an **Overdue** badge.
+* Highlighted for improved visibility.
+
+### Persistent Data Storage
+
+On the first launch, the application loads a set of sample invoices demonstrating various payment states (Paid, Unpaid, and Overdue).
+
+Subsequent changes are automatically saved to **localStorage** using the key:
 
 ```
+ledger.invoices.v1
+```
+
+This allows invoice data to persist across browser refreshes without requiring a backend service.
+
+---
+
+## Project Structure
+
+```text
 src/
-  components/       UI pieces (table, form, filters, summary, header, badge)
-  hooks/useInvoices.js   State + localStorage persistence
-  data/seed.js       Example invoices for first load
-  utils/format.js    Currency/date formatting + overdue check
+├── components/          Reusable UI components
+│   ├── Invoice Table
+│   ├── Invoice Form
+│   ├── Filters
+│   ├── Summary Bar
+│   ├── Header
+│   └── Status Badge
+│
+├── hooks/
+│   └── useInvoices.js   State management and localStorage persistence
+│
+├── data/
+│   └── seed.js          Initial sample invoice data
+│
+├── utils/
+│   └── format.js        Currency formatting, date formatting, overdue logic
+│
+├── App.jsx
+└── main.jsx
 ```
 
-Component breakdown is intentionally flat — this is a single screen, so
-there's one hook owning the data and a handful of presentational
-components underneath `App`.
+The application follows a simple, modular architecture where a custom hook manages business logic and persistence while reusable UI components focus solely on presentation.
 
-## What I'd improve with more time
+---
 
-- Editing/deleting an existing invoice, not just adding and marking paid.
-- Sorting the table by column (currently it's insertion order).
-- Swap the plain `<input type="date">` for a nicer date picker component.
-- Basic tests (form validation, the "already paid" no-op, derived totals)
-  with Vitest + React Testing Library.
+## Design Highlights
+
+* Clean and responsive user interface
+* Modular React component architecture
+* Centralized state management using custom hooks
+* Persistent browser storage
+* Dynamic financial calculations
+* Inline form validation
+* Maintainable and scalable project structure
+
+---
+
+## Future Enhancements
+
+Potential improvements include:
+
+* Edit existing invoices
+* Delete invoices
+* Column-based sorting
+* Search functionality
+* Advanced filtering options
+* Enhanced date picker component
+* Export invoices (PDF/Excel)
+* Dashboard analytics
+* Unit and integration testing using **Vitest** and **React Testing Library**
+
+---
+
+## Project Summary
+
+This project demonstrates key frontend development concepts, including:
+
+* React Component-Based Architecture
+* Custom Hooks
+* State Management
+* Form Validation
+* Local Storage Persistence
+* Dynamic Data Rendering
+* Financial Summary Calculations
+* Responsive User Interface
+* Clean and Maintainable Code
+
+
